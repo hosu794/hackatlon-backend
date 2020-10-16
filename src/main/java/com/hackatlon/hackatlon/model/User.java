@@ -35,7 +35,7 @@ public class User extends DateAudit {
     @Size(max = 15)
     private String username;
 
-    private String avatar;
+
 
     @NaturalId
     @NotBlank
@@ -55,14 +55,20 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username, String avatar, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
+    public User(Long id, @NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.username = username;
-        this.avatar = avatar;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public User(@NotBlank @Size(max = 40) String name, @NotBlank @Size(max = 15) String username, @NotBlank @Size(max = 40) @Email String email, @NotBlank @Size(max = 100) String password) {
+        this.name = name;
+        this.username = username;
+        this.email = email;
+        this.password = password;
     }
 
     public User() {}
@@ -89,14 +95,6 @@ public class User extends DateAudit {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
     }
 
     public String getEmail() {

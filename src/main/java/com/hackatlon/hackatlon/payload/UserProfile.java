@@ -11,19 +11,20 @@ public class UserProfile {
 
     private Instant joinedAt;
 
-    private Long storyCount;
-
-    private Long loveCount;
-
-    private String avatarDownloadUri;
-
-    public String getAvatarDownloadUri() {
-        return avatarDownloadUri;
+    public UserProfile(String username, String name, Instant joinedAt) {
+        this.username = username;
+        this.name = name;
+        this.joinedAt = joinedAt;
     }
 
-    public void setAvatarDownloadUri(String avatarDownloadUri) {
-        this.avatarDownloadUri = avatarDownloadUri;
+    public UserProfile(Long id, String username, String name, Instant joinedAt) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.joinedAt = joinedAt;
     }
+
+    public UserProfile() {}
 
     public Long getId() {
         return id;
@@ -55,40 +56,5 @@ public class UserProfile {
 
     public void setJoinedAt(Instant joinedAt) {
         this.joinedAt = joinedAt;
-    }
-
-    public Long getStoryCount() {
-        return storyCount;
-    }
-
-    public void setStoryCount(Long storyCount) {
-        this.storyCount = storyCount;
-    }
-
-    public Long getLoveCount() {
-        return loveCount;
-    }
-
-    public void setLoveCount(Long loveCount) {
-        this.loveCount = loveCount;
-    }
-
-    public UserProfile(Long id, String username, String name, Instant joinedAt, Long storyCount, Long loveCount) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.joinedAt = joinedAt;
-        this.storyCount = storyCount;
-        this.loveCount = loveCount;
-    }
-
-    public UserProfile(Long id, String username, String name, Instant joinedAt, Long storyCount, Long loveCount, String avatarDownloadUri) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.joinedAt = joinedAt;
-        this.storyCount = storyCount;
-        this.loveCount = loveCount;
-        this.avatarDownloadUri = avatarDownloadUri;
     }
 }
