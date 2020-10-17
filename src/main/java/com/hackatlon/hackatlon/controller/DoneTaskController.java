@@ -1,6 +1,7 @@
 package com.hackatlon.hackatlon.controller;
 
 import com.hackatlon.hackatlon.model.DoneTask;
+import com.hackatlon.hackatlon.payload.DoneTaskRequest;
 import com.hackatlon.hackatlon.payload.DoneTaskResponse;
 import com.hackatlon.hackatlon.payload.LevelResponse;
 import com.hackatlon.hackatlon.payload.PagedResponse;
@@ -8,6 +9,7 @@ import com.hackatlon.hackatlon.security.CurrentUser;
 import com.hackatlon.hackatlon.security.UserPrincipal;
 import com.hackatlon.hackatlon.service.DoneTaskService;
 import com.hackatlon.hackatlon.util.AppConstants;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -40,8 +42,8 @@ public class DoneTaskController {
 
     @PostMapping
     @PreAuthorize("hasRole('USER')")
-    public DoneTask createDoneTask(@CurrentUser UserPrincipal currentUser, Long taskId) {
-        return doneTaskService.createDoneTask(currentUser, taskId);
+    public DoneTask createDoneTask(@CurrentUser UserPrincipal currentUser, @RequestBody @Valid DoneTaskRequest doneTaskRequest) {
+        return doneTaskService.createDoneTask(currentUser, doneTaskRequest.getTaskId());
     }
 
     @DeleteMapping
