@@ -1,0 +1,35 @@
+version: 2.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:12.9.1-browsers # primary container - where job steps are run
+    working_directory: ~/mind-app-client
+    steps:
+      - checkout
+      # Bundle install dependencies
+      - run: yarn install
+      - run: yarn test
+
+  deploy:
+    machine:
+      enabled: true
+    working_directory: ~/https://github.com/mars/create-react-app-buildpack.git
+
+    steps:
+      - checkout
+
+      - run:
+          command: |
+            git push --force https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
