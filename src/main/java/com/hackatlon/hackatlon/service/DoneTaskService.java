@@ -75,7 +75,7 @@ public class DoneTaskService {
 
         List<DoneTask> doneTasks = doneTaskRepository.findByCreatedBy(user.getId());
 
-        float currentLevel = doneTasks.size() / 10l;
+        float currentLevel = doneTasks.size() / 5l;
         long roundedLevel = Math.round(currentLevel);
 
         return new LevelResponse(roundedLevel);

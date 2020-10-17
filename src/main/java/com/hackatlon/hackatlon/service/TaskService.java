@@ -55,6 +55,21 @@ public class TaskService {
 
     }
 
+    public PagedResponse<TaskResponse> getAllByPathId(Long pathId, int page, int size) {
+        ValidatePageUtil.validatePageNumberAndSize(page, size);
+
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "title");
+        Page<Task> tasks = taskRepository.findByPathId(pathId, pageable);
+
+        if(tasks.getNumberOfElements() == 0) {
+            return new PagedResponse<>(Collections.emptyList(), tasks.getNumber(), tasks.getSize(), tasks.getTotalElements(), tasks.getTotalPages(), tasks.isLast());
+        }
+
+        List<TaskResponse> taskResponses = tasks.map(task -> ModelMapper.mapTaskToTaskResponse(task)).getContent();
+
+        return new PagedResponse<>(taskResponses, tasks.getNumber(), tasks.getSize(), tasks.getTotalElements(), tasks.getTotalPages(), tasks.isLast());
+    }
+
 
 
 
