@@ -79,15 +79,20 @@ public class TaskService {
         Page<Task> tasks = taskRepository.findByPathId(pathId, pageable);
 
       Pageable pageableOfDoneTasks = PageRequest.of(page, size, Sort.Direction.DESC, "createdAt");
-      Page<DoneTask> doneTasks = doneTaskRepository.findByCreatedBy(currentUser.getId(), pageable);
+      Page<DoneTask> doneTasks = doneTaskRepository.findByCreatedBy(currentUser.getId(), pageableOfDoneTasks);
 
 
         List<Task> tasksList = tasks.getContent();
         List<Task> doneTaskList = doneTasks.getContent().stream().map(doneTask -> doneTask.getTask()).collect(Collectors.toList());
 
-      tasksList.removeAll(doneTaskList);
+     // tasksList.removeAll(doneTaskList);
 
-        List<TaskResponse> taskResponses = tasks.map(task -> ModelMapper.mapTaskToTaskResponse(task)).getContent();
+        List<Task> differences = tasksList.stream()
+                .filter(element -> !doneTaskList.contains(element))
+                .collect(Collectors.toList());
+
+
+        List<TaskResponse> taskResponses = differences.stream().map(task -> ModelMapper.mapTaskToTaskResponse(task)).collect(Collectors.toList());
 
         return new PagedResponse<>(taskResponses, tasks.getNumber(), tasks.getSize(), tasks.getTotalElements(), tasks.getTotalPages(), tasks.isLast());
     }
