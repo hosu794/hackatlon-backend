@@ -33,14 +33,14 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class DoneTaskServiceImpl {
+public class DoneTaskService {
 
     private final DoneTaskRepository doneTaskRepository;
     private final TaskRepository taskRepository;
     private final PathRepository pathRepository;
     private final UserRepository userRepository;
 
-    public DoneTaskServiceImpl(DoneTaskRepository doneTaskRepository, TaskRepository taskRepository, PathRepository
+    public DoneTaskService(DoneTaskRepository doneTaskRepository, TaskRepository taskRepository, PathRepository
             pathRepository, UserRepository userRepository) {
         this.doneTaskRepository = doneTaskRepository;
         this.taskRepository = taskRepository;
@@ -81,8 +81,6 @@ public class DoneTaskServiceImpl {
         return new LevelResponse(roundedLevel);
     }
 
-
-
     public DoneTask createDoneTask(UserPrincipal currentUser, Long taskId) {
         User user = userRepository.findById(currentUser.getId()).orElseThrow(() -> new ResourceNotFoundException("User", "id", currentUser.getId()));
 
@@ -111,7 +109,7 @@ public class DoneTaskServiceImpl {
 
     }
 
-    public Map<Long, User> getCreatorsIdsAndCreatorOfDoneTask(List<DoneTask> doneTasks) {
+    private Map<Long, User> getCreatorsIdsAndCreatorOfDoneTask(List<DoneTask> doneTasks) {
 
 
         List<Long> creatorIds = doneTasks.stream()

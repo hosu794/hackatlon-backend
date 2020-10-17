@@ -2,8 +2,10 @@ package com.hackatlon.hackatlon.util;
 
 
 import com.hackatlon.hackatlon.model.DoneTask;
+import com.hackatlon.hackatlon.model.Task;
 import com.hackatlon.hackatlon.model.User;
 import com.hackatlon.hackatlon.payload.DoneTaskResponse;
+import com.hackatlon.hackatlon.payload.TaskResponse;
 import com.hackatlon.hackatlon.payload.UserSummary;
 
 public class ModelMapper {
@@ -19,5 +21,14 @@ public class ModelMapper {
 
         return doneTaskResponse;
     }
+
+    public static TaskResponse mapTaskToTaskResponse(Task task) {
+        TaskResponse taskResponse = new TaskResponse();
+        taskResponse.setId(task.getId());
+        taskResponse.setTitle(task.getTitle());
+
+        return taskResponse;
+    }
+
 
 }
