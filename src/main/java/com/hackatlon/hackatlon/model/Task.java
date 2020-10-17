@@ -27,6 +27,8 @@ public class Task {
     @NotNull
     private Path path;
 
+
+
     public Task(Long id, @NotBlank String title, @NotNull Path path) {
         this.id = id;
         this.title = title;

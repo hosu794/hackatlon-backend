@@ -40,6 +40,8 @@ public class DoneTaskService {
     private final PathRepository pathRepository;
     private final UserRepository userRepository;
 
+
+
     public DoneTaskService(DoneTaskRepository doneTaskRepository, TaskRepository taskRepository, PathRepository
             pathRepository, UserRepository userRepository) {
         this.doneTaskRepository = doneTaskRepository;
@@ -86,7 +88,10 @@ public class DoneTaskService {
 
         Task task = taskRepository.findById(taskId).orElseThrow(() -> new ResourceNotFoundException("Task", "id", taskId));
 
+
+
         DoneTask doneTask = new DoneTask();
+        doneTask.setPath(task.getPath());
         doneTask.setTask(task);
 
         return doneTaskRepository.save(doneTask);

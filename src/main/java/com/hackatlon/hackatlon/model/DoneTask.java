@@ -19,13 +19,26 @@ public class DoneTask extends UserDateAudit {
     @NotNull
     private Task task;
 
+    @ManyToOne
+    @JoinColumn(name = "path_id", referencedColumnName = "path_id", nullable = false)
+    @NotNull
+    private Path path;
+
     public DoneTask() {}
 
-    public DoneTask(Long id, @NotNull Task task) {
+    public DoneTask(Long id, @NotNull Task task, @NotNull Path path) {
         this.id = id;
         this.task = task;
+        this.path = path;
     }
 
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
+    }
 
     public Long getId() {
         return id;
