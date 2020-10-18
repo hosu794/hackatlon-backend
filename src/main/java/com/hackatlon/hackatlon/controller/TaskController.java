@@ -8,6 +8,7 @@ import com.hackatlon.hackatlon.security.UserPrincipal;
 import com.hackatlon.hackatlon.service.TaskService;
 import com.hackatlon.hackatlon.util.AppConstants;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -35,6 +36,7 @@ public class TaskController {
     }
 
     @GetMapping("/path/{pathId}/todo")
+    @PreAuthorize("hasRole('USER')")
     public PagedResponse<TaskResponse> getByPathTodo(@PathVariable Long pathId, @CurrentUser UserPrincipal currentUser, @RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
                                                      @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
         return taskService.getAllAvailableTasks(pathId, currentUser, page, size);
