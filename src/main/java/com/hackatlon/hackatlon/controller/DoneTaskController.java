@@ -46,9 +46,9 @@ public class DoneTaskController {
         return doneTaskService.createDoneTask(currentUser, doneTaskRequest.getTaskId());
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{doneTaskId}")
     @PreAuthorize("hasRole('USER')")
-    public ResponseEntity<?> deleteDoneTask(@CurrentUser UserPrincipal currentUser, Long doneTaskId) {
+    public ResponseEntity<?> deleteDoneTask(@CurrentUser UserPrincipal currentUser, @PathVariable Long doneTaskId) {
         return doneTaskService.deleteDoneTask(currentUser, doneTaskId);
     }
 
