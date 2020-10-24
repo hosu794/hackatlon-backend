@@ -5,10 +5,7 @@ import com.hackatlon.hackatlon.payload.PathResponse;
 import com.hackatlon.hackatlon.service.PathService;
 import com.hackatlon.hackatlon.util.AppConstants;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -22,6 +19,10 @@ public class PathController {
 
     private final PathService pathService;
 
+    @GetMapping("/{pathId}")
+    public PathResponse findById(@PathVariable Long pathId) {
+        return pathService.findById(pathId);
+    }
 
     @GetMapping
     public PagedResponse<PathResponse> getAllPaths(@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
