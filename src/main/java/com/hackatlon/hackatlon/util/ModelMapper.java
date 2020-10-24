@@ -34,6 +34,7 @@ public class ModelMapper {
 
     public static PathResponse mapPathToPathResponse(Path path) {
         PathResponse pathResponse = new PathResponse();
+        pathResponse.setImageUrl(path.getImageUrl());
         pathResponse.setId(path.getId());
         pathResponse.setTitle(path.getTitle());
         return pathResponse;

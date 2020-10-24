@@ -20,11 +20,27 @@ public class Path {
     @NotBlank
     private String title;
 
+    private String imageUrl;
+
     public Path() {}
 
     public Path(Long id, @NotBlank String title) {
         this.id = id;
         this.title = title;
+    }
+
+    public Path(Long id, @NotBlank String title, String imageUrl) {
+        this.id = id;
+        this.title = title;
+        this.imageUrl = imageUrl;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {

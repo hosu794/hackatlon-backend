@@ -4,14 +4,23 @@ public class PathResponse {
 
     private Long id;
     private String title;
+    private String imageUrl;
 
     public PathResponse() {}
 
-    public PathResponse(Long id, String title) {
+    public PathResponse(Long id, String title, String imageUrl) {
         this.id = id;
         this.title = title;
+        this.imageUrl = imageUrl;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
 
     public Long getId() {
         return id;
